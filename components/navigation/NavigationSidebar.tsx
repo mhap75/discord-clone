@@ -50,4 +50,5 @@ const NavigationSidebar = async () => {
     </div>
   );
 };
+
 export default NavigationSidebar;

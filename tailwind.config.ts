@@ -3,11 +3,11 @@ import type { Config } from "tailwindcss";
 const config: Config = {
   darkMode: ["class"],
   content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
-	],
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
+  ],
   theme: {
     container: {
       center: true,
@@ -26,7 +26,7 @@ const config: Config = {
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
-          background: "#313338"
+          background: "#313338",
         },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
@@ -60,14 +60,12 @@ const config: Config = {
       },
       keyframes: {
         "accordion-down": {
-          // @ts-ignore
-          from: { height: 0 },
+          from: { height: "0" },
           to: { height: "var(--radix-accordion-content-height)" },
         },
         "accordion-up": {
           from: { height: "var(--radix-accordion-content-height)" },
-          // @ts-ignore
-          to: { height: 0 },
+          to: { height: "0" },
         },
       },
       animation: {
@@ -75,14 +73,14 @@ const config: Config = {
         "accordion-up": "accordion-up 0.2s ease-out",
       },
       height: {
-        dynamic: "100dvh"
+        dynamic: "100dvh",
       },
       width: {
-        dynamic: "100dvw"
-      }
+        dynamic: "100dvw",
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],
-}
+};
 
 export default config;

@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useModal } from "@/hooks/useModal";
 import useOrigin from "@/hooks/useOrigin";
+import http from "@/lib/rest/http";
 import { Check, Copy, RefreshCw } from "lucide-react";
 import { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
@@ -15,8 +16,10 @@ const InviteModal = () => {
     onClose,
     isOpen,
     data: { server },
+    onOpen,
   } = useModal();
   const [isCopied, setIsCopied] = useState(false);
+  const [isGenerating, setIsGenerating] = useState(false);
   const origin = useOrigin();
   const inviteUrl = `${origin}/invite/${server?.inviteCode}`;
 
@@ -27,6 +30,19 @@ const InviteModal = () => {
       setTimeout(() => setIsCopied(false), 2000);
     } catch (e) {
       console.log(e);
+    }
+  };
+
+  const handleGenerateNewCode = async () => {
+    setIsGenerating(true);
+    try {
+      const { data } = await http.patch(`/servers/${server?.id}/invite-code`);
+      onOpen("invite", { server: data });
+      await navigator.clipboard.writeText(`${origin}/invite/${data.inviteCode}`);
+    } catch (e) {
+      console.log(e);
+    } finally {
+      setIsGenerating(false);
     }
   };
 
@@ -43,10 +59,12 @@ const InviteModal = () => {
             Server invitation link
             <div className="mt-2 flex items-center gap-x-2">
               <Input
+                disabled={isGenerating}
                 className="border-none bg-zinc-300/50 text-black focus-visible:ring-0 focus-visible:ring-offset-0"
                 value={inviteUrl}
+                readOnly
               />
-              <Button size="icon" onClick={handleCopy}>
+              <Button disabled={isGenerating} size="icon" onClick={handleCopy}>
                 {isCopied ? (
                   <Check className="size-4 text-green-600" />
                 ) : (
@@ -56,12 +74,16 @@ const InviteModal = () => {
             </div>
           </Label>
           <Button
+            onClick={handleGenerateNewCode}
+            disabled={isGenerating}
             variant="link"
             size="sm"
             className="mt-4 text-xs text-zinc-500"
           >
             Generate a new link
-            <RefreshCw className="size-4 ml-2" />
+            <RefreshCw
+              className={`size-4 ml-1 mt-0.5 ${isGenerating && "animate-spin"}`}
+            />
           </Button>
         </div>
       </DialogContent>

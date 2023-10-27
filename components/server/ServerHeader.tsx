@@ -19,6 +19,7 @@ import {
   UserPlus,
   Users,
 } from "lucide-react";
+import { useState } from "react";
 
 interface ServerHeaderProps {
   server: ServerMemberProfile;
@@ -27,15 +28,20 @@ interface ServerHeaderProps {
 
 const ServerHeader: React.FC<ServerHeaderProps> = ({ server, role }) => {
   const { onOpen } = useModal();
+  const [isDropOpen, setIsDropOpen] = useState(false);
   const isAdmin = role === MemberRole.ADMIN;
   const isModerator = isAdmin || role === MemberRole.MODERATOR;
 
   return (
-    <DropdownMenu>
+    <DropdownMenu onOpenChange={setIsDropOpen}>
       <DropdownMenuTrigger className="focus:outline-none" asChild>
-        <button className="_itemDropdown_1k9ef_5 flex-center h-12 w-full border-b-2 border-neutral-200 px-3 font-semibold transition hover:bg-zinc-700/10 dark:border-neutral-800 dark:hover:bg-zinc-700/50">
+        <button className="flex-center h-12 w-full border-b-2 border-neutral-200 px-3 font-semibold transition hover:bg-zinc-700/10 dark:border-neutral-800 dark:hover:bg-zinc-700/50">
           {server.name}
-          <ChevronDown className="ml-auto h-5 w-5" />
+          <ChevronDown
+            className={`ml-auto h-5 w-5 transition ${
+              isDropOpen && "rotate-180"
+            }`}
+          />
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56 space-y-[2px] text-xs font-medium text-black dark:text-neutral-400">
@@ -50,11 +56,17 @@ const ServerHeader: React.FC<ServerHeaderProps> = ({ server, role }) => {
         )}
         {isAdmin && (
           <>
-            <DropdownMenuItem className="cursor-pointer px-3 py-2 text-sm">
+            <DropdownMenuItem
+              onClick={() => onOpen("editServer", { server })}
+              className="cursor-pointer px-3 py-2 text-sm"
+            >
               Server Settings
               <Settings className="ml-auto h-4 w-4" />
             </DropdownMenuItem>
-            <DropdownMenuItem className="cursor-pointer px-3 py-2 text-sm">
+            <DropdownMenuItem
+              onClick={() => onOpen("members", { server })}
+              className="cursor-pointer px-3 py-2 text-sm"
+            >
               Manage Members
               <Users className="ml-auto h-4 w-4" />
             </DropdownMenuItem>

@@ -53,6 +53,27 @@ const MembersModal = () => {
   };
   const { refresh } = useRouter();
 
+  const handleKickOut = async (memberId: string) => {
+    setLoadingId(memberId);
+    try {
+      const url = qs.stringifyUrl({
+        url: `/api/members/${memberId}`,
+        query: {
+          serverId: server?.id,
+        },
+      });
+
+      const { data } = await axios.delete(url);
+
+      refresh();
+      onOpen("members", { server: data });
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoadingId("");
+    }
+  };
+
   const handleRoleChange = async (memberId: string, role: MemberRole) => {
     setLoadingId(memberId);
     try {
@@ -139,7 +160,10 @@ const MembersModal = () => {
                           </DropdownMenuPortal>
                         </DropdownMenuSub>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem className="cursor-pointer text-amber-500 hover:!bg-amber-300/50 hover:!text-amber-500 dark:hover:!bg-amber-800/50">
+                        <DropdownMenuItem
+                          className="cursor-pointer text-amber-500 hover:!bg-amber-300/50 hover:!text-amber-500 dark:hover:!bg-amber-800/50"
+                          onClick={() => handleKickOut(id)}
+                        >
                           <Gavel className="size-4 mr-2" />
                           Kick out
                         </DropdownMenuItem>

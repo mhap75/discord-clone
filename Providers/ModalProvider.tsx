@@ -1,10 +1,12 @@
 "use client";
 
+import AddChannelModal from "@/components/modal/AddChannelModal";
 import AddServerModal from "@/components/modal/AddServerModal";
 import EditServerModal from "@/components/modal/EditServerModal";
 import InviteModal from "@/components/modal/InviteModal";
-import { useEffect, useState } from "react";
 import MembersModal from "@/components/modal/MembersModal";
+import { Toaster } from "@/components/ui/toaster";
+import { useEffect, useState } from "react";
 
 const ModalProvider = () => {
   const [isMounted, setIsMounted] = useState(false);
@@ -23,6 +25,8 @@ const ModalProvider = () => {
       <InviteModal />
       <EditServerModal />
       <MembersModal />
+      <AddChannelModal />
+      <Toaster />
     </>
   );
 };

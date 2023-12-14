@@ -2,8 +2,10 @@
 
 import AddChannelModal from "@/components/modal/AddChannelModal";
 import AddServerModal from "@/components/modal/AddServerModal";
+import DeleteServerModal from "@/components/modal/DeleteServerModal";
 import EditServerModal from "@/components/modal/EditServerModal";
 import InviteModal from "@/components/modal/InviteModal";
+import LeaveServerModal from "@/components/modal/LeaveServerModal";
 import MembersModal from "@/components/modal/MembersModal";
 import { Toaster } from "@/components/ui/toaster";
 import { useEffect, useState } from "react";
@@ -26,6 +28,8 @@ const ModalProvider = () => {
       <EditServerModal />
       <MembersModal />
       <AddChannelModal />
+      <LeaveServerModal />
+      <DeleteServerModal />
       <Toaster />
     </>
   );

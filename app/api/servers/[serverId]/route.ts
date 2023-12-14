@@ -29,3 +29,28 @@ export async function PATCH(
     return new NextResponse("Internal server error", { status: 500 });
   }
 }
+
+export async function DELETE(
+  req: Request,
+  { params: { serverId } }: { params: { serverId: string } },
+) {
+  try {
+    const profile = await currentProfile();
+
+    if (!profile) return new NextResponse("Unauthorized", { status: 401 });
+    if (!serverId)
+      return new NextResponse("Server ID not found", { status: 400 });
+
+    const server = await db.server.delete({
+      where: {
+        id: serverId,
+        profileId: profile.id,
+      },
+    });
+
+    return NextResponse.json(server);
+  } catch (err) {
+    console.error("Server Deletion failed", err);
+    return new NextResponse("Internal server error", { status: 500 });
+  }
+}

@@ -28,7 +28,7 @@ import {
 import { Input } from "../ui/input";
 
 const AddServerModal = () => {
-  const { refresh, push } = useRouter();
+  const { refresh } = useRouter();
   const { type, onClose, isOpen } = useModal();
 
   const form = useForm({

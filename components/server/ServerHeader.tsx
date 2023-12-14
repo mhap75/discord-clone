@@ -85,12 +85,18 @@ const ServerHeader: React.FC<ServerHeaderProps> = ({ server, role }) => {
           </>
         )}
         {isAdmin ? (
-          <DropdownMenuItem className="cursor-pointer px-3 py-2 text-sm text-rose-500 hover:!bg-rose-300/50 hover:!text-rose-500 dark:hover:!bg-rose-800/50">
+          <DropdownMenuItem
+            className="cursor-pointer px-3 py-2 text-sm text-rose-500 hover:!bg-rose-300/50 hover:!text-rose-500 dark:hover:!bg-rose-800/50"
+            onClick={() => onOpen("deleteServer", { server })}
+          >
             Delete Server
             <Trash className="ml-auto h-4 w-4" />
           </DropdownMenuItem>
         ) : (
-          <DropdownMenuItem className="cursor-pointer px-3 py-2 text-sm text-rose-500 hover:!bg-rose-300/50 hover:!text-rose-500 dark:hover:!bg-rose-800/50">
+          <DropdownMenuItem
+            className="cursor-pointer px-3 py-2 text-sm text-rose-500 hover:!bg-rose-300/50 hover:!text-rose-500 dark:hover:!bg-rose-800/50"
+            onClick={() => onOpen("leaveServer", { server })}
+          >
             Leave Server
             <LogOut className="ml-auto h-4 w-4" />
           </DropdownMenuItem>

@@ -8,7 +8,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { ToastAction } from "@/components/ui/toast";
-import { toast } from "@/components/ui/use-toast";
+import { useToast } from "@/components/ui/use-toast";
 import { useModal } from "@/hooks/useModal";
 import { initialChannelForm } from "@/lib/validation/server";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -40,6 +40,7 @@ const AddChannelModal = () => {
   const { refresh } = useRouter();
   const { type, onClose, isOpen } = useModal();
   const params = useParams();
+  const { toast } = useToast();
 
   const form = useForm({
     resolver: zodResolver(initialChannelForm),
@@ -68,6 +69,11 @@ const AddChannelModal = () => {
       reset();
       onClose();
       refresh();
+      toast({
+        variant: "default",
+        title: "Success!",
+        description: "A new Channel has been added to your server",
+      });
     } catch (error) {
       const err = error as AxiosError;
       toast({

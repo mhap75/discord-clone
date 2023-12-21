@@ -114,7 +114,7 @@ const MembersModal = () => {
                 key={id}
                 className="flex-ic mb-4 gap-x-4 rounded-md py-2 ps-2.5 hover:bg-zinc-200/50"
               >
-                <UserAvatar scr={imageUrl} />
+                <UserAvatar src={imageUrl} />
                 <div className="flexCol gap-y-1">
                   <div className="flex-ic gap-x-1 text-xs font-semibold">
                     {name !== "null null" ? name : "User"}

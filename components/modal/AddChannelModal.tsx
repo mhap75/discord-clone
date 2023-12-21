@@ -16,6 +16,7 @@ import { ChannelType } from "@prisma/client";
 import axios, { AxiosError } from "axios";
 import { useParams, useRouter } from "next/navigation";
 import qs from "query-string";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { Button } from "../ui/button";
@@ -38,7 +39,12 @@ import { Input } from "../ui/input";
 
 const AddChannelModal = () => {
   const { refresh } = useRouter();
-  const { type, onClose, isOpen } = useModal();
+  const {
+    type,
+    onClose,
+    isOpen,
+    data: { channelType },
+  } = useModal();
   const params = useParams();
   const { toast } = useToast();
 
@@ -46,7 +52,7 @@ const AddChannelModal = () => {
     resolver: zodResolver(initialChannelForm),
     defaultValues: {
       name: "",
-      type: ChannelType.TEXT,
+      type: channelType || ChannelType.TEXT,
     },
   });
   const {
@@ -93,6 +99,15 @@ const AddChannelModal = () => {
     reset();
     onClose();
   };
+
+  useEffect(() => {
+    console.log(channelType);
+    if (channelType) {
+      form.setValue("type", channelType);
+    } else {
+      form.setValue("type", ChannelType.TEXT);
+    }
+  }, [channelType, form]);
 
   return (
     <Dialog

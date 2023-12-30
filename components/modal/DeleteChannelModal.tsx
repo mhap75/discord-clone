@@ -5,7 +5,8 @@ import { ToastAction } from "@/components/ui/toast";
 import { useToast } from "@/components/ui/use-toast";
 import { useModal } from "@/hooks/useModal";
 import axios, { AxiosError } from "axios";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
+import qs from "query-string";
 import { useState } from "react";
 import {
   Dialog,
@@ -15,6 +16,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "../ui/dialog";
+import { revalidatePath } from "next/cache";
 
 const DeleteChannelModal = () => {
   const {
@@ -27,19 +29,26 @@ const DeleteChannelModal = () => {
   const { push, refresh } = useRouter();
   const { toast } = useToast();
 
-  const handleLeaveServer = async () => {
+  const handleDeleteChannel = async () => {
     setIsLoading(true);
+    const url = qs.stringifyUrl({
+      url: `/api/channels/${channel?.id}`,
+      query: {
+        serverId: server?.id,
+      },
+    });
+
     try {
-      await axios.delete(`/api/channels/${channel?.id}`);
+      await axios.delete(url);
 
       onClose();
-      refresh();
       toast({
         variant: "default",
         title: "Success!",
         description: "The Channel has been deleted.",
       });
-      push("/");
+      push(`/servers/${server?.id}`);
+      refresh();
     } catch (error) {
       const err = error as AxiosError;
       toast({
@@ -47,7 +56,7 @@ const DeleteChannelModal = () => {
         title: "Uh oh! Something went wrong.",
         description: err.message,
         action: (
-          <ToastAction onClick={handleLeaveServer} altText="Try again">
+          <ToastAction onClick={handleDeleteChannel} altText="Try again">
             Try again
           </ToastAction>
         ),
@@ -80,7 +89,7 @@ const DeleteChannelModal = () => {
             <Button
               disabled={isLoading}
               variant="destructive"
-              onClick={handleLeaveServer}
+              onClick={handleDeleteChannel}
             >
               Confirm
             </Button>

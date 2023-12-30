@@ -144,7 +144,7 @@ const ServerSidebar: React.FC<ServerSidebarProps> = async ({ serverId }) => {
         {!!audChannels?.length && (
           <div className="mb-2">
             <ServerSection
-              label="Video Channels"
+              label="Voice Channels"
               sectionType="channels"
               channelType={ChannelType.AUDIO}
               role={role}
@@ -162,7 +162,7 @@ const ServerSidebar: React.FC<ServerSidebarProps> = async ({ serverId }) => {
         {!!vidChannels?.length && (
           <div className="mb-2">
             <ServerSection
-              label="Voice Channels"
+              label="Video Channels"
               sectionType="channels"
               channelType={ChannelType.VIDEO}
               role={role}

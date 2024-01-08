@@ -1,5 +1,6 @@
 import Clerk from "@/Providers/Clerk";
 import ModalProvider from "@/Providers/ModalProvider";
+import { SocketProvider } from "@/Providers/ScoketProvider";
 import { ThemeProvider } from "@/Providers/ThemeProvider";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
@@ -31,8 +32,10 @@ export default function MainLayout({
             storageKey="discord-theme"
           >
             <main>
-              <ModalProvider />
-              {children}
+              <SocketProvider>
+                <ModalProvider />
+                {children}
+              </SocketProvider>
             </main>
           </ThemeProvider>
         </body>

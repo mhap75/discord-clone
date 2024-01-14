@@ -18,5 +18,8 @@
         "size-4"
       ]
     }
+  },
+  "rules": {
+    "@typescript-eslint/no-explicit-any": 0
   }
 }

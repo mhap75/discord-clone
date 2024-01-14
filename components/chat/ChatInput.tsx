@@ -53,7 +53,6 @@ const ChatInput: React.FC<ChatInputProps> = ({ apiUrl, query, name, type }) => {
       console.log(error);
     }
   };
-
   return (
     <Form {...form}>
       <form onSubmit={handleSubmit(onSubmit)}>

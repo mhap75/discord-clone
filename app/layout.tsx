@@ -1,5 +1,6 @@
 import Clerk from "@/Providers/Clerk";
 import ModalProvider from "@/Providers/ModalProvider";
+import { QueryProvider } from "@/Providers/QueryProvider";
 import { SocketProvider } from "@/Providers/ScoketProvider";
 import { ThemeProvider } from "@/Providers/ThemeProvider";
 import { cn } from "@/lib/utils";
@@ -34,7 +35,7 @@ export default function MainLayout({
             <main>
               <SocketProvider>
                 <ModalProvider />
-                {children}
+                <QueryProvider>{children}</QueryProvider>
               </SocketProvider>
             </main>
           </ThemeProvider>

@@ -101,7 +101,6 @@ const AddChannelModal = () => {
   };
 
   useEffect(() => {
-    console.log(channelType);
     if (channelType) {
       form.setValue("type", channelType);
     } else {

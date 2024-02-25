@@ -1,5 +1,6 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { useModal } from "@/hooks/useModal";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -68,7 +69,7 @@ const ChatInput: React.FC<ChatInputProps> = ({ apiUrl, query, name, type }) => {
                   <button
                     type="button"
                     onClick={() => onOpen("messageFile", { apiUrl, query })}
-                    className="absolute left-8 top-5 flex h-[24px] w-[24px] items-center justify-center rounded-full bg-zinc-500 p-1 transition hover:bg-zinc-600 dark:bg-zinc-400 dark:hover:bg-zinc-300"
+                    className="absolute left-8 top-5 flex size-[24px] items-center justify-center rounded-full bg-zinc-500 p-1 transition hover:bg-zinc-600 dark:bg-zinc-400 dark:hover:bg-zinc-300"
                   >
                     <Plus className="text-white dark:text-[#313338]" />
                   </button>
@@ -79,6 +80,13 @@ const ChatInput: React.FC<ChatInputProps> = ({ apiUrl, query, name, type }) => {
                     placeholder={`Message ${type === "conversation" ? name : "#" + name}`}
                     {...field}
                   />
+                  <Button
+                    type="submit"
+                    className="absolute right-16 top-3.5"
+                    disabled={isSubmitting}
+                  >
+                    Send
+                  </Button>
                   <div className="absolute right-8 top-5">
                     <EmojiPicker
                       onChange={(emoji: string) =>

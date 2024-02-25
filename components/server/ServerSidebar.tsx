@@ -18,17 +18,17 @@ interface ServerSidebarProps {
 }
 
 const iconMap = {
-  [ChannelType.TEXT]: <Hash className="size-4 mr-2" />,
-  [ChannelType.AUDIO]: <Mic className="size-4 mr-2" />,
-  [ChannelType.VIDEO]: <Video className="size-4 mr-2" />,
+  [ChannelType.TEXT]: <Hash className="mr-2 size-4" />,
+  [ChannelType.AUDIO]: <Mic className="mr-2 size-4" />,
+  [ChannelType.VIDEO]: <Video className="mr-2 size-4" />,
 };
 
 const roleIconMap = {
   [MemberRole.GUEST]: null,
   [MemberRole.MODERATOR]: (
-    <ShieldAlert className="size-4 mr-2 text-indigo-500" />
+    <ShieldAlert className="mr-2 size-4 text-indigo-500" />
   ),
-  [MemberRole.ADMIN]: <ShieldCheck className="size-4 mr-2 text-indigo-500" />,
+  [MemberRole.ADMIN]: <ShieldCheck className="mr-2 size-4 text-indigo-500" />,
 };
 
 const ServerSidebar: React.FC<ServerSidebarProps> = async ({ serverId }) => {
@@ -77,7 +77,7 @@ const ServerSidebar: React.FC<ServerSidebarProps> = async ({ serverId }) => {
   const role = server.members.find((mem) => mem.profileId === profile.id)?.role;
 
   return (
-    <div className="flexCol sizeFull bg-[#F2F3F5] text-primary dark:bg-[#2B2D31]">
+    <div className="flexCol size-full bg-[#F2F3F5] text-primary dark:bg-[#2B2D31]">
       <ServerHeader server={server} role={role} />
       <ScrollArea className="flex-1 px-3">
         <div className="mt-2">

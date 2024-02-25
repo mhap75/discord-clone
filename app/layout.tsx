@@ -24,7 +24,10 @@ export default function MainLayout({
     <Clerk>
       <html lang="en" suppressHydrationWarning>
         <body
-          className={cn(os.className, "bg-white dark:bg-primary-background")}
+          className={cn(
+            os.className,
+            "relative bg-white dark:bg-primary-background",
+          )}
         >
           <ThemeProvider
             attribute="class"

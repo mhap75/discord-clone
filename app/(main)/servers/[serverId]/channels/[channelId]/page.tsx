@@ -37,7 +37,7 @@ const ChannelById = async ({
         name={channel.name}
         type="channel"
       />
-      <div className="flex-1">Future messages</div>
+      {/*<div className="flex-1">Future messages</div>*/}
       <ChatMessages
         member={member}
         name={channel.name}

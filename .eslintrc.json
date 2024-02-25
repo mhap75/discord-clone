@@ -6,20 +6,13 @@
     "plugin:@typescript-eslint/recommended",
     "plugin:tailwindcss/recommended"
   ],
-  "plugins": [
-    "@typescript-eslint"
-  ],
+  "plugins": ["@typescript-eslint"],
   "settings": {
     "tailwindcss": {
-      "whitelist": [
-        "flex-between-center",
-        "flexCol",
-        "flex-ic",
-        "size-4"
-      ]
+      "whitelist": ["flex-between-center", "flexCol", "flex-ic", "size-4"]
     }
   },
   "rules": {
-    "@typescript-eslint/no-explicit-any": 0
+    "@typescript-eslint/no-explicit-any": ["warn"]
   }
 }
